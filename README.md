@@ -1,6 +1,6 @@
 # RetroBIOS // Archive — sitio estático
 
-Página https://thewizwikii.github.io/R3tr0BI0S/ no oficial para navegar y descargar los packs de BIOS
+Página [R3troBi0s](https://thewizwikii.github.io/R3tr0BI0S) no oficial para navegar y descargar los packs de BIOS
 del proyecto [Abdess/retrobios](https://github.com/Abdess/retrobios).
 
 No incluye ningún archivo de BIOS: cada botón de descarga apunta directamente
