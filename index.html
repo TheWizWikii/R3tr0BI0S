@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROBIOS // ARCHIVE — Packs de BIOS para retroconsolas</title>
+<meta name="description" content="Descarga packs de BIOS y firmware verificados para Batocera, RetroArch, RetroPie, RetroDECK, RomM y más. Basado en Abdess/retrobios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Fondo animado: horizonte synthwave -->
+<canvas id="grid-bg" aria-hidden="true"></canvas>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">// ARCHIVO NO OFICIAL DE FIRMWARE PARA EMULACIÓN</p>
+    <h1 class="glitch" data-text="RETROBIOS">RETROBIOS</h1>
+    <p class="tagline">Packs de BIOS y firmware verificados contra el código fuente de cada emulador.<br>Elige tu plataforma, descarga el ZIP, extrae y a jugar.</p>
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><span class="stat-num">7 646</span><span class="stat-label">archivos verificados</span></div>
+      <div class="stat" role="listitem"><span class="stat-num">12</span><span class="stat-label">plataformas</span></div>
+      <div class="stat" role="listitem"><span class="stat-num">314</span><span class="stat-label">emuladores</span></div>
+      <div class="stat" role="listitem"><span class="stat-num">v2026.08.06</span><span class="stat-label">última build</span></div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#packs" class="btn btn-primary">▶ VER PACKS</a>
+      <a href="#instalar" class="btn btn-ghost">Instalación por terminal</a>
+    </div>
+  </div>
+  <div class="crt-sun" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section id="instalar" class="terminal-section">
+    <h2 class="section-title"><span>01</span> Instalación rápida</h2>
+    <p class="section-sub">Un solo comando detecta tu plataforma y solo descarga lo que falte.</p>
+
+    <div class="terminal-tabs">
+      <button class="tab active" data-tab="linux">Linux / macOS / Steam Deck</button>
+      <button class="tab" data-tab="win">Windows (PowerShell)</button>
+      <button class="tab" data-tab="handheld">Portátil (tarjeta SD)</button>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar"><span></span><span></span><span></span><p>sh</p></div>
+      <pre class="terminal-body" id="term-linux">curl -fsSL https://raw.githubusercontent.com/Abdess/retrobios/main/install.sh | sh</pre>
+      <pre class="terminal-body hidden" id="term-win">irm https://raw.githubusercontent.com/Abdess/retrobios/main/install.ps1 | iex</pre>
+      <pre class="terminal-body hidden" id="term-handheld">curl -fsSL https://raw.githubusercontent.com/Abdess/retrobios/main/install.sh | sh -s -- --platform retroarch --dest /ruta/a/tu/sd</pre>
+      <button class="copy-btn" id="copy-btn">COPIAR</button>
+    </div>
+  </section>
+
+  <section id="packs" class="packs-section">
+    <h2 class="section-title"><span>02</span> Elige tu sistema</h2>
+    <p class="section-sub">Cada pack incluye lo que tu frontend necesita, comprobado archivo a archivo contra el código de sus emuladores.</p>
+
+    <div class="filter-bar">
+      <input type="text" id="search" placeholder="BUSCAR PLATAFORMA..." aria-label="Buscar plataforma">
+      <div class="legend">
+        <span class="legend-item"><i class="dot dot-full"></i> Pack completo</span>
+        <span class="legend-item"><i class="dot dot-lite"></i> Pack de plataforma</span>
+      </div>
+    </div>
+
+    <div class="cart-grid" id="cart-grid">
+      <!-- Las tarjetas se generan también se pueden leer aquí de forma estática -->
+    </div>
+  </section>
+
+  <section class="standalone-section">
+    <h2 class="section-title"><span>03</span> Emuladores independientes</h2>
+    <p class="section-sub">No van empaquetados por ningún frontend, así que tienen su propio pack.</p>
+    <div class="cart-grid" id="standalone-grid"></div>
+  </section>
+
+  <section class="about-section">
+    <h2 class="section-title"><span>04</span> Cómo funciona</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>01. Lee el código fuente</h3>
+        <p>Cada archivo que un emulador carga se rastrea directamente en su código: nombre, hash y tamaño esperados.</p>
+      </div>
+      <div class="about-card">
+        <h3>02. Cruza con cada plataforma</h3>
+        <p>Se compara contra lo que cada frontend (Batocera, RetroArch, RomM...) declara en su propia lista de BIOS.</p>
+      </div>
+      <div class="about-card">
+        <h3>03. Construye el pack</h3>
+        <p>Incluye los archivos base más lo que cada núcleo necesita, cubriendo casos límite y firmwares opcionales.</p>
+      </div>
+      <div class="about-card">
+        <h3>04. Verifica</h3>
+        <p>Aplica el mismo test que usa tu plataforma: hash MD5/SHA1 o simple presencia del archivo, según el caso.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-logo">RETROBIOS<span>_</span></p>
+      <p class="footer-note">Fansite no oficial creado sobre el proyecto <a href="https://github.com/Abdess/retrobios" target="_blank" rel="noopener">Abdess/retrobios</a>. Todo el trabajo de recopilación, verificación y empaquetado pertenece a su autor y colaboradores.</p>
+    </div>
+    <div>
+      <h4>Aviso legal</h4>
+      <p class="footer-note">Las herramientas y scripts se distribuyen bajo licencia MIT. Los archivos de BIOS y firmware <strong>no</strong> están cubiertos por esa licencia: son software de sistema de terceros, conservado con fines de copia de seguridad personal, archivo e interoperabilidad con software de emulación. Solo emplea BIOS de hardware que poseas legalmente.</p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <ul class="footer-links">
+        <li><a href="https://github.com/Abdess/retrobios" target="_blank" rel="noopener">Repositorio original</a></li>
+        <li><a href="https://github.com/Abdess/retrobios/releases/latest" target="_blank" rel="noopener">Todas las releases</a></li>
+        <li><a href="https://abdess.github.io/retrobios/" target="_blank" rel="noopener">Documentación completa</a></li>
+        <li><a href="https://github.com/Abdess/retrobios/blob/main/NOTICE" target="_blank" rel="noopener">NOTICE / retirada de archivos</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="footer-bottom">Construido con HTML, CSS y JS puro. Sin trackers, sin cookies.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
